@@ -8,11 +8,11 @@
     android:settingsActivity="com.kavina.ussd_launcher.UssdLauncherSettingsActivity" /> -->
 
 
-<!-- <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/accessibility_service_description"
     android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
     android:accessibilityFlags="flagReportViewIds"
     android:accessibilityFeedbackType="feedbackGeneric"
     android:notificationTimeout="100"
     android:canRetrieveWindowContent="true"
-    android:settingsActivity="com.example.android.accessibility.ServiceSettingsActivity" /> -->
+    android:settingsActivity="com.example.android.accessibility.ServiceSettingsActivity" />
