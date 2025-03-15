@@ -45,10 +45,10 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "sendUssdRequest" -> {
-                // if (!isAccessibilityServiceEnabled()) {
-                //     openAccessibilitySettings()
-                //     return
-                // }
+                if (!isAccessibilityServiceEnabled()) {
+                    openAccessibilitySettings()
+                    return
+                }
                 
                 val ussdCode = call.argument<String>("ussdCode")
                 val subscriptionId = call.argument<Int>("subscriptionId") ?: -1
@@ -59,10 +59,10 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                 }
             }
             "multisessionUssd" -> {
-                // if (!isAccessibilityServiceEnabled()) {
-                //     openAccessibilitySettings()
-                //     return
-                // }
+                if (!isAccessibilityServiceEnabled()) {
+                    openAccessibilitySettings()
+                    return
+                }
     
                 val ussdCode = call.argument<String>("ussdCode")
                 val slotIndex = call.argument<Int>("slotIndex") ?: 0
