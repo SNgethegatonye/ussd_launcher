@@ -45,11 +45,6 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "sendUssdRequest" -> {
-                if (!isAccessibilityServiceEnabled()) {
-                    openAccessibilitySettings()
-                    return
-                }
-                
                 val ussdCode = call.argument<String>("ussdCode")
                 val subscriptionId = call.argument<Int>("subscriptionId") ?: -1
                 if (ussdCode != null) {
@@ -58,12 +53,11 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                     result.error("INVALID_ARGUMENT", "USSD code is required", null)
                 }
             }
+            "requestAccessibilityPermission" -> {
+                val isGranted = requestAccessibilityPermission()
+                result.success(isGranted)
+            }
             "multisessionUssd" -> {
-                if (!isAccessibilityServiceEnabled()) {
-                    openAccessibilitySettings()
-                    return
-                }
-    
                 val ussdCode = call.argument<String>("ussdCode")
                 val slotIndex = call.argument<Int>("slotIndex") ?: 0
                 val options = call.argument<List<String>>("options") ?: emptyList()
@@ -104,6 +98,14 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
             }
             else -> result.notImplemented()
         }
+    }
+
+    private fun requestAccessibilityPermission(): Boolean {
+        if (!isAccessibilityServiceEnabled()) {
+            openAccessibilitySettings()
+            return false // Permission not granted, settings opened
+        }
+        return true // Permission granted
     }
 
     private fun isAccessibilityServiceEnabled(): Boolean {
