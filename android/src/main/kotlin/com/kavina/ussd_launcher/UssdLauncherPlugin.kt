@@ -58,7 +58,8 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                 result.success(isGranted)
             }
             "multisessionUssd" -> {
-                val ussdCode = call.argument<String>("ussdCode")
+               try{
+                    val ussdCode = call.argument<String>("ussdCode")
                 val slotIndex = call.argument<Int>("slotIndex") ?: 0
                 val options = call.argument<List<String>>("options") ?: emptyList()
                 if (ussdCode != null) {
@@ -74,6 +75,10 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                 } else {
                     result.error("INVALID_ARGUMENT", "USSD code is required", null)
                 }
+               }catch(e){
+                   result.error("USSD_FAILURE", e, null)
+               }
+                   
             }
             // "sendMessage" -> {
             //     val message = call.argument<String>("message")
