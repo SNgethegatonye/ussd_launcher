@@ -22,13 +22,13 @@ class UssdLauncher {
     }
   }
 
-  static Future<bool?> requestAccessibilityPermission(){
+  static Future<bool> requestAccessibilityPermission() async {
      try {
-       final bool? isPermissionAllowed = await _channel.invokeMethod('requestAccessibilityPermission');
-        return isPermissionAllowed;
+      final bool isGranted = await _channel.invokeMethod('requestAccessibilityPermission');
+       return isGranted;
     } on PlatformException catch (e) {
       print("Failed to request accessibility permission : ${e.message}");
-      return null;
+      return false;
     }
   }
 
