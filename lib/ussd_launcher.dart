@@ -22,6 +22,16 @@ class UssdLauncher {
     }
   }
 
+  static Future<bool?> requestAccessibilityPermission(){
+     try {
+       final bool? isPermissionAllowed = await _channel.invokeMethod('requestAccessibilityPermission');
+        return isPermissionAllowed;
+    } on PlatformException catch (e) {
+      print("Failed to request accessibility permission : ${e.message}");
+      return null;
+    }
+  }
+
   // Lance une requête USSD en session unique 
   // static Future<String> launchUssd(String ussdCode, {int subscriptionId = -1}) async {
   // static Future<String> launchUssd(String ussdCode, int? subscriptionId) async {
