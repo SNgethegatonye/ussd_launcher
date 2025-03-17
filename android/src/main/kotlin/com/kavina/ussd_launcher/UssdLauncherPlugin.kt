@@ -71,14 +71,6 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                }
                    
             }
-            // "sendMessage" -> {
-            //     val message = call.argument<String>("message")
-            //     if (message != null) {
-            //         ussdMultiSession.sendMessage(message, result)
-            //     } else {
-            //         result.error("INVALID_ARGUMENT", "Message is required", null)
-            //     }
-            // }
 
             "getSimCards" -> {
                 ussdSessionUnique.getSimCards(result)
