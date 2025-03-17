@@ -6,22 +6,6 @@ class UssdLauncher {
   static const MethodChannel _channel = MethodChannel('ussd_launcher');
 
 
-  static Future<String?> sendUssdRequest({
-    required String ussdCode,
-    required int subscriptionId,
-  }) async {
-    try {
-      final String? response = await _channel.invokeMethod('sendUssdRequest', {
-        'ussdCode': ussdCode,
-        'subscriptionId': subscriptionId,
-      });
-      return response;
-    } on PlatformException catch (e) {
-      print("Erreur lors de l'envoi de la requête USSD : ${e.message}");
-      return null;
-    }
-  }
-
   static Future<bool> requestAccessibilityPermission() async {
      try {
       final bool isGranted = await _channel.invokeMethod('requestAccessibilityPermission');
