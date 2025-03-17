@@ -72,9 +72,7 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                    
             }
 
-            "getSimCards" -> {
-                ussdSessionUnique.getSimCards(result)
-            }
+           
             else -> result.notImplemented()
         }
     }
