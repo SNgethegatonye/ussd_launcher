@@ -158,11 +158,11 @@ class UssdAccessibilityService : AccessibilityService() {
             }
         }
 
-        if (pendingMessages.isNotEmpty()) {
-            performReply()
-        } else {
-            closeDialog()
-        }
+        // if (pendingMessages.isNotEmpty()) {
+        //     performReply()
+        // } else {
+        //     closeDialog()
+        // }
     }
 
 
