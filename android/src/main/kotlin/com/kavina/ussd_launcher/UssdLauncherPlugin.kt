@@ -13,7 +13,6 @@ import android.os.Looper
 class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
     private lateinit var channel : MethodChannel
     private lateinit var context: Context
-    private lateinit var ussdSessionUnique: UssdSessionUnique
     private lateinit var ussdMultiSession: UssdMultiSession
 
     companion object {
@@ -36,7 +35,6 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(this)
         setMethodChannel(channel)
         context = flutterPluginBinding.applicationContext
-        ussdSessionUnique = UssdSessionUnique(context)
         ussdMultiSession = UssdMultiSession(context)
     }
 
