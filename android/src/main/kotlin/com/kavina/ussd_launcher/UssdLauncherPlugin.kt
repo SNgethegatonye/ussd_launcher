@@ -7,7 +7,6 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import android.os.Handler
 import android.os.Looper
 
@@ -23,7 +22,6 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
     
         fun onUssdResult(result: String) {
             handler.post {
-                println("Envoi du message USSD via le canal: $result")
                 channel?.invokeMethod("onUssdMessageReceived", result)
             }
         }
@@ -63,19 +61,21 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
                 val slotIndex = call.argument<Int>("slotIndex") ?: 0
                 val options = call.argument<List<String>>("options") ?: emptyList()
                 if (ussdCode != null) {
-                    ussdMultiSession.callUSSDWithMenu(ussdCode, slotIndex, options, createHashMap(), object : UssdMultiSession.CallbackInvoke {
+                    ussdMultiSession.callUSSDWithMenu(ussdCode, slotIndex, options, createHashMap(), object :
+                        UssdMultiSession.CallbackInvoke {
                         override fun responseInvoke(message: String) {
                             onUssdResult(message)
+                            result.success(message)
                         }
                         override fun over(message: String) {
-                            onUssdResult(message) // Envoyer le message via le canal de méthode
-                            result.success(null)   // Terminer la méthode avec succès
+                            onUssdResult(message)
+                            result.success(message)
                         }
                     })
                 } else {
                     result.error("INVALID_ARGUMENT", "USSD code is required", null)
                 }
-               }catch(e){
+               }catch(e: Exception){
                    result.error("USSD_FAILURE", e, null)
                }
                    
@@ -88,16 +88,7 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
             //         result.error("INVALID_ARGUMENT", "Message is required", null)
             //     }
             // }
-            // "cancelSession" -> {
-            //     ussdMultiSession.cancelSession(result)
-            // }
-            // "isAccessibilityPermissionEnabled" -> {
-            //     result.success(isAccessibilityServiceEnabled())
-            // }
-            // "openAccessibilitySettings" -> {
-            //     openAccessibilitySettings()
-            //     result.success(null)
-            // }
+
             "getSimCards" -> {
                 ussdSessionUnique.getSimCards(result)
             }
