@@ -136,10 +136,10 @@ class UssdAccessibilityService : AccessibilityService() {
     }
 
     private fun logEventDetails(event: AccessibilityEvent) {
-        println("Accessibility event received: ${event.eventType}")
-        println("Event source: ${event.source}")
-        println("Event class name: ${event.className}")
-        println("Event package name: ${event.packageName}")
+        // println("Accessibility event received: ${event.eventType}")
+        // println("Event source: ${event.source}")
+        // println("Event class name: ${event.className}")
+        // println("Event package name: ${event.packageName}")
         println("Event text: ${event.text}")
     }
 
@@ -180,7 +180,7 @@ class UssdAccessibilityService : AccessibilityService() {
     }
 
     override fun onInterrupt() {
-        cancelSession()
+        // cancelSession()
     }
 
     override fun onServiceConnected() {
