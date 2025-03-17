@@ -123,7 +123,7 @@ class UssdAccessibilityService : AccessibilityService() {
     }
 
     private fun handleWindowStateChanged(event: AccessibilityEvent) {
-        if (hideDialogs) performGlobalAction(GLOBAL_ACTION_BACK)
+        // if (hideDialogs) performGlobalAction(GLOBAL_ACTION_BACK)
 
         logEventDetails(event)
 
