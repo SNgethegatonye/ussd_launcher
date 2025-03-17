@@ -42,15 +42,6 @@ class UssdLauncherPlugin: FlutterPlugin, MethodCallHandler {
 
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
-            "sendUssdRequest" -> {
-                val ussdCode = call.argument<String>("ussdCode")
-                val subscriptionId = call.argument<Int>("subscriptionId") ?: -1
-                if (ussdCode != null) {
-                    ussdSessionUnique.sendUssdRequest(ussdCode, subscriptionId, result)
-                } else {
-                    result.error("INVALID_ARGUMENT", "USSD code is required", null)
-                }
-            }
             "requestAccessibilityPermission" -> {
                 val isGranted = requestAccessibilityPermission()
                 result.success(isGranted)
