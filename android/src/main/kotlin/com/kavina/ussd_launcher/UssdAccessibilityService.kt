@@ -183,12 +183,12 @@ class UssdAccessibilityService : AccessibilityService() {
 
     // Gère les événements d'accessibilité
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
-            if (hideDialogs) {
-                // Fermer automatiquement la fenêtre de dialogue USSD
-                performGlobalAction(GLOBAL_ACTION_BACK)
-            }
-        }
+        // if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+        //     if (hideDialogs) {
+        //         // Fermer automatiquement la fenêtre de dialogue USSD
+        //         performGlobalAction(GLOBAL_ACTION_BACK)
+        //     }
+        // }
 
         try {
             println("Accessibility event received: ${event?.eventType}")
